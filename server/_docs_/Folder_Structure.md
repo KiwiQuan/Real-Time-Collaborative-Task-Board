@@ -1,3 +1,7 @@
+# Project Folder Structure
+
+This document explains the purpose of each folder in the project structure.
+
 - **controllers/**: Handle request/response logic.
 - **routes/**: Define API endpoints.
 - **models/**: Define data structures (in-memory for now).
