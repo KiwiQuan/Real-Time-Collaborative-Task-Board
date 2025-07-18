@@ -3,7 +3,7 @@
 ## 1. Backend (Express + SSE)
 
 - [x] Set up Express server structure (`server/`)
-- [ ] Implement in-memory data storage for boards and tasks
+- [x] Implement in-memory data storage for boards and tasks
 - [ ] Create REST API endpoints:
   - [ ] GET /boards
   - [ ] POST /boards
