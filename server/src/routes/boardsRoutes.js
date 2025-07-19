@@ -4,5 +4,6 @@ const boardsController = require("../controllers/boardsController");
 
 router.get("/", boardsController.getAllBoards);
 router.post("/", boardsController.createBoard);
+router.get("/:boardId", boardsController.getBoardById);
 
 module.exports = router;

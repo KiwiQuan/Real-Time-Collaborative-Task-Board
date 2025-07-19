@@ -7,8 +7,13 @@
 - [x] Create REST API endpoints:
   - [x] GET /boards
   - [x] POST /boards
+  - [x] GET /boards/:boardId
+  - [ ] PATCH /boards/:boardId
+  - [ ] DELETE /boards/:boardId
   - [ ] GET /boards/:boardId/tasks
   - [ ] POST /boards/:boardId/tasks
+  - [ ] DELETE /boards/:boardId/tasks
+  - [ ] GET /boards/:boardId/tasks/:taskId
   - [ ] PATCH /boards/:boardId/tasks/:taskId
   - [ ] DELETE /boards/:boardId/tasks/:taskId
 - [ ] Implement SSE endpoint for real-time updates:
