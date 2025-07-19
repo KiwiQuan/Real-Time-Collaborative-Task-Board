@@ -1,9 +1,18 @@
 const express = require("express");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const boardsRoutes = require("./routes/boardsRoutes");
+
+app.use(express.json());
+app.use("/boards", boardsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!!!!");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send("Sorry! Something went wrong.");
 });
 
 app.listen(PORT, () => {

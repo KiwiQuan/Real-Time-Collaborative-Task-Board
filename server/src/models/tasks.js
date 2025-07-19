@@ -1,4 +1,6 @@
+// object structure: {id: number, title: string, description: string, completed: boolean}
 const tasksByBoard = new Map();
+let nextTaskId = 1;
 
 function getTasksByBoard(boardId) {
   return tasksByBoard.get(boardId) || [];
@@ -13,7 +15,9 @@ function createTask(boardId, task) {
   if (!tasksByBoard.has(boardId)) {
     tasksByBoard.set(boardId, []);
   }
+  task.id = nextTaskId++;
   tasksByBoard.get(boardId).push(task);
+  return task;
 }
 
 function updateTask(boardId, taskId, updates) {
@@ -36,10 +40,17 @@ function deleteTask(boardId, taskId) {
   return null;
 }
 
+function deleteAllTasksForBoard(boardId) {
+  const tasks = getTasksByBoard(boardId);
+  tasksByBoard.delete(boardId);
+  return tasks;
+}
+
 module.exports = {
   getTasksByBoard,
   getTaskById,
   createTask,
   updateTask,
   deleteTask,
+  deleteAllTasksForBoard,
 };

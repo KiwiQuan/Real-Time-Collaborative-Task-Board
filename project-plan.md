@@ -4,9 +4,9 @@
 
 - [x] Set up Express server structure (`server/`)
 - [x] Implement in-memory data storage for boards and tasks
-- [ ] Create REST API endpoints:
-  - [ ] GET /boards
-  - [ ] POST /boards
+- [x] Create REST API endpoints:
+  - [x] GET /boards
+  - [x] POST /boards
   - [ ] GET /boards/:boardId/tasks
   - [ ] POST /boards/:boardId/tasks
   - [ ] PATCH /boards/:boardId/tasks/:taskId
