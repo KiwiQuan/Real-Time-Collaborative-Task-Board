@@ -1,6 +1,10 @@
-// object structure: {id: number, name: string, description: string}
-const boards = [];
 let nextBoardId = 1;
+// object structure: {id: number, name: string, description: string}
+const boards = [
+  { id: nextBoardId++, name: "Board 1", description: "Description 1" },
+  { id: nextBoardId++, name: "Board 2", description: "Description 2" },
+  { id: nextBoardId++, name: "Board 3", description: "Description 3" },
+];
 
 function getBoards() {
   return boards;

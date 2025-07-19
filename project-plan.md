@@ -8,8 +8,8 @@
   - [x] GET /boards
   - [x] POST /boards
   - [x] GET /boards/:boardId
-  - [ ] PATCH /boards/:boardId
-  - [ ] DELETE /boards/:boardId
+  - [x] PATCH /boards/:boardId
+  - [x] DELETE /boards/:boardId
   - [ ] GET /boards/:boardId/tasks
   - [ ] POST /boards/:boardId/tasks
   - [ ] DELETE /boards/:boardId/tasks
