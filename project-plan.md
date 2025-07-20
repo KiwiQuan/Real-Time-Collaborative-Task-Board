@@ -10,12 +10,12 @@
   - [x] GET /boards/:boardId
   - [x] PATCH /boards/:boardId
   - [x] DELETE /boards/:boardId
-  - [ ] GET /boards/:boardId/tasks
-  - [ ] POST /boards/:boardId/tasks
-  - [ ] DELETE /boards/:boardId/tasks
-  - [ ] GET /boards/:boardId/tasks/:taskId
-  - [ ] PATCH /boards/:boardId/tasks/:taskId
-  - [ ] DELETE /boards/:boardId/tasks/:taskId
+  - [x] GET /boards/:boardId/tasks
+  - [x] POST /boards/:boardId/tasks
+  - [x] DELETE /boards/:boardId/tasks
+  - [x] GET /boards/:boardId/tasks/:taskId
+  - [x] PATCH /boards/:boardId/tasks/:taskId
+  - [x] DELETE /boards/:boardId/tasks/:taskId
 - [ ] Implement SSE endpoint for real-time updates:
   - [ ] GET /boards/:boardId/stream
 - [ ] Broadcast task changes to all connected clients via SSE

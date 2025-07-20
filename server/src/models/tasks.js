@@ -1,6 +1,54 @@
+let nextTaskId = 1;
 // object structure: {id: number, title: string, description: string, completed: boolean}
 const tasksByBoard = new Map();
-let nextTaskId = 1;
+tasksByBoard.set(1, [
+  {
+    id: nextTaskId++,
+    title: "Task 1",
+    description: "Description 1",
+    completed: false,
+  },
+  {
+    id: nextTaskId++,
+    title: "Task 2",
+    description: "Description 2",
+    completed: false,
+  },
+  {
+    id: nextTaskId++,
+    title: "Task 3",
+    description: "Description 3",
+    completed: false,
+  },
+]);
+tasksByBoard.set(2, [
+  {
+    id: nextTaskId++,
+    title: "Task 4",
+    description: "Description 4",
+    completed: false,
+  },
+  {
+    id: nextTaskId++,
+    title: "Task 5",
+    description: "Description 5",
+    completed: false,
+  },
+  {
+    id: nextTaskId++,
+    title: "Task 6",
+    description: "Description 6",
+    completed: true,
+  },
+]);
+tasksByBoard.set(3, [
+  {
+    id: nextTaskId++,
+    title: "Task 7",
+    description: "Description 7",
+    completed: false,
+  },
+]);
 
 function getTasksByBoard(boardId) {
   return tasksByBoard.get(boardId) || [];
@@ -11,12 +59,17 @@ function getTaskById(boardId, taskId) {
   return tasks.find((t) => t.id === taskId);
 }
 
-function createTask(boardId, task) {
+function initTasksForBoard(boardId) {
   if (!tasksByBoard.has(boardId)) {
     tasksByBoard.set(boardId, []);
   }
+}
+
+function createTask(boardId, task) {
+  initTasksForBoard(boardId);
+  const tasks = getTasksByBoard(boardId);
   task.id = nextTaskId++;
-  tasksByBoard.get(boardId).push(task);
+  tasks.push(task);
   return task;
 }
 
@@ -53,4 +106,5 @@ module.exports = {
   updateTask,
   deleteTask,
   deleteAllTasksForBoard,
+  initTasksForBoard,
 };

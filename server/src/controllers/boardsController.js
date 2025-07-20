@@ -1,4 +1,5 @@
 const boardsModel = require("../models/boards");
+const tasksModel = require("../models/tasks");
 
 function getAllBoards(req, res) {
   const boards = boardsModel.getBoards();
@@ -6,13 +7,7 @@ function getAllBoards(req, res) {
 }
 
 function getBoardById(req, res) {
-  const boardId = parseInt(req.params.boardId);
-  const board = boardsModel.getBoardById(boardId);
-  if (board) {
-    res.json(board);
-  } else {
-    res.status(404).json({ error: "Board not found" });
-  }
+  res.json(req.board);
 }
 
 function createBoard(req, res) {
@@ -20,31 +15,22 @@ function createBoard(req, res) {
     return res.status(400).json({ error: "Cannot create board with ID" });
   }
   const board = boardsModel.createBoard(req.body);
+  tasksModel.initTasksForBoard(board.id);
   res.status(201).json(board);
 }
 
 function updateBoard(req, res) {
-  const boardId = parseInt(req.params.boardId);
   const updates = req.body;
   if (updates.id) {
     return res.status(400).json({ error: "Cannot update board ID" });
   }
-  const updatedBoard = boardsModel.updateBoard(boardId, updates);
-  if (updatedBoard) {
-    res.json(updatedBoard);
-  } else {
-    res.status(404).json({ error: "Board not found" });
-  }
+  const updatedBoard = boardsModel.updateBoard(req.board.id, updates);
+  res.json(updatedBoard);
 }
 
 function deleteBoard(req, res) {
-  const boardId = parseInt(req.params.boardId);
-  const deletedBoard = boardsModel.deleteBoard(boardId);
-  if (deletedBoard) {
-    res.json(deletedBoard);
-  } else {
-    res.status(404).json({ error: "Board not found" });
-  }
+  const deletedBoard = boardsModel.deleteBoard(req.board.id);
+  res.json(deletedBoard);
 }
 
 module.exports = {

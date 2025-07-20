@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const boardsRoutes = require("./routes/boardsRoutes");
+const tasksRoutes = require("./routes/tasksRoutes");
 
 app.use(express.json());
 app.use("/boards", boardsRoutes);
+app.use("/boards/:boardId/tasks", tasksRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!!!!");
