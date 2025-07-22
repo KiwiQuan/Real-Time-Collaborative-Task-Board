@@ -9,3 +9,4 @@ This document explains the purpose of each folder in the project structure.
 - **middleware/**: Express middleware functions.
 - **utils/**: Helper functions.
 - **public/**: Static assets (if needed).
+- **validationSchemas.js/**: Joi validation schemas.

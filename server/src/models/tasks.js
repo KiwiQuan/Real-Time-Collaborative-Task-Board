@@ -69,6 +69,7 @@ function createTask(boardId, task) {
   initTasksForBoard(boardId);
   const tasks = getTasksByBoard(boardId);
   task.id = nextTaskId++;
+  task.completed = task.completed || false;
   tasks.push(task);
   return task;
 }

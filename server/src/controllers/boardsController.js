@@ -30,7 +30,8 @@ function updateBoard(req, res) {
 
 function deleteBoard(req, res) {
   const deletedBoard = boardsModel.deleteBoard(req.board.id);
-  res.json(deletedBoard);
+  tasksModel.deleteAllTasksForBoard(req.board.id);
+  res.status(200).json(deletedBoard);
 }
 
 module.exports = {

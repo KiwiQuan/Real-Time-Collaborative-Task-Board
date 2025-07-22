@@ -2,11 +2,36 @@ const express = require("express");
 const router = express.Router();
 const boardsController = require("../controllers/boardsController");
 const requireBoard = require("../middleware/requireBoard");
+const validateRequest = require("../middleware/validateRequests");
+const {
+  boardCreateSchema,
+  boardIdSchema,
+  boardUpdateSchema,
+} = require("../../validationSchemas.js/boardsSchema");
 
 router.get("/", boardsController.getAllBoards);
-router.post("/", boardsController.createBoard);
-router.get("/:boardId", requireBoard, boardsController.getBoardById);
-router.patch("/:boardId", requireBoard, boardsController.updateBoard);
-router.delete("/:boardId", requireBoard, boardsController.deleteBoard);
+router.post(
+  "/",
+  validateRequest({ body: boardCreateSchema }),
+  boardsController.createBoard
+);
+router.get(
+  "/:boardId",
+  validateRequest({ params: boardIdSchema }),
+  requireBoard,
+  boardsController.getBoardById
+);
+router.patch(
+  "/:boardId",
+  validateRequest({ params: boardIdSchema, body: boardUpdateSchema }),
+  requireBoard,
+  boardsController.updateBoard
+);
+router.delete(
+  "/:boardId",
+  validateRequest({ params: boardIdSchema }),
+  requireBoard,
+  boardsController.deleteBoard
+);
 
 module.exports = router;
