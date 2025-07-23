@@ -41,6 +41,10 @@ function deleteBoard(req, res) {
 }
 
 function streamBoard(req, res) {
+  const heartBeat = setInterval(() => {
+    res.write(":heartbeat\n\n");
+  }, 30000);
+
   res.set({
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
@@ -52,6 +56,7 @@ function streamBoard(req, res) {
 
   req.on("close", () => {
     removeSubscriber(req.board.id, res);
+    clearInterval(heartBeat);
     res.end();
   });
 }
