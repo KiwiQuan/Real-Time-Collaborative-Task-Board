@@ -1,5 +1,10 @@
 const boardsModel = require("../models/boards");
 const tasksModel = require("../models/tasks");
+const {
+  addSubscriber,
+  removeSubscriber,
+} = require("../models/boardSubscribers");
+const { broadcastToBoard } = require("../utiles/broadcastToBoard");
 
 function getAllBoards(req, res) {
   const boards = boardsModel.getBoards();
@@ -31,7 +36,24 @@ function updateBoard(req, res) {
 function deleteBoard(req, res) {
   const deletedBoard = boardsModel.deleteBoard(req.board.id);
   tasksModel.deleteAllTasksForBoard(req.board.id);
+  broadcastToBoard(req.board.id, "boardDeleted", deletedBoard);
   res.status(200).json(deletedBoard);
+}
+
+function streamBoard(req, res) {
+  res.set({
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache",
+    Connection: "keep-alive",
+  });
+  res.flushHeaders();
+
+  addSubscriber(req.board.id, res);
+
+  req.on("close", () => {
+    removeSubscriber(req.board.id, res);
+    res.end();
+  });
 }
 
 module.exports = {
@@ -40,4 +62,5 @@ module.exports = {
   getBoardById,
   updateBoard,
   deleteBoard,
+  streamBoard,
 };

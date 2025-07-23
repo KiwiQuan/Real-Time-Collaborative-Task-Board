@@ -16,9 +16,9 @@
   - [x] GET /boards/:boardId/tasks/:taskId
   - [x] PATCH /boards/:boardId/tasks/:taskId
   - [x] DELETE /boards/:boardId/tasks/:taskId
-- [ ] Implement SSE endpoint for real-time updates:
-  - [ ] GET /boards/:boardId/stream
-- [ ] Broadcast task changes to all connected clients via SSE
+- [x] Implement SSE endpoint for real-time updates:
+  - [x] GET /boards/:boardId/stream
+- [x] Broadcast task changes to all connected clients via SSE
 
 ## 2. Frontend (React + Vite)
 

@@ -34,4 +34,11 @@ router.delete(
   boardsController.deleteBoard
 );
 
+router.get(
+  "/:boardId/stream",
+  validateRequest({ params: boardIdSchema }),
+  requireBoard,
+  boardsController.streamBoard
+);
+
 module.exports = router;
