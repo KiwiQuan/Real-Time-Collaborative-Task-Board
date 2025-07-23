@@ -6,6 +6,9 @@ function broadcastToBoard(boardId, event, data) {
       subscriber.write(`event: ${event}\n`);
       subscriber.write(`data: ${JSON.stringify(data)}\n\n`);
     });
+    console.log(
+      `Broadcasted to ${boardSubscribers.get(boardId).size} subscribers`
+    );
   }
 }
 
