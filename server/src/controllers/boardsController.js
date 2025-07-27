@@ -8,11 +8,11 @@ const { broadcastToBoard } = require("../utiles/broadcastToBoard");
 
 function getAllBoards(req, res) {
   const boards = boardsModel.getBoards();
-  res.json(boards);
+  res.status(200).json(boards);
 }
 
 function getBoardById(req, res) {
-  res.json(req.board);
+  res.status(200).json(req.board);
 }
 
 function createBoard(req, res) {
@@ -21,7 +21,8 @@ function createBoard(req, res) {
   }
   const board = boardsModel.createBoard(req.body);
   tasksModel.initTasksForBoard(board.id);
-  res.status(201).json(board);
+  broadcastToBoard(board.id, "boardCreated", board);
+  res.status(200).json(board);
 }
 
 function updateBoard(req, res) {
@@ -30,7 +31,8 @@ function updateBoard(req, res) {
     return res.status(400).json({ error: "Cannot update board ID" });
   }
   const updatedBoard = boardsModel.updateBoard(req.board.id, updates);
-  res.json(updatedBoard);
+  broadcastToBoard(req.board.id, "boardUpdated", updatedBoard);
+  res.status(200).json(updatedBoard);
 }
 
 function deleteBoard(req, res) {

@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require("cors");
 const boardsRoutes = require("./routes/boardsRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
 const validateRequest = require("./middleware/validateRequests");
 const { boardIdSchema } = require("../validationSchemas.js/boardsSchema");
 
 app.use(express.json());
+app.use(cors());
 app.use("/boards", boardsRoutes);
 app.use(
   "/boards/:boardId/tasks",

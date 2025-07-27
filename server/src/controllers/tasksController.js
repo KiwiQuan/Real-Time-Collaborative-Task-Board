@@ -3,7 +3,7 @@ const { broadcastToBoard } = require("../utiles/broadcastToBoard");
 
 function getTasksByBoard(req, res) {
   const tasks = tasksModel.getTasksByBoard(req.board.id);
-  res.json(tasks);
+  res.status(200).json(tasks);
 }
 
 function createTask(req, res) {
@@ -13,7 +13,7 @@ function createTask(req, res) {
   const task = tasksModel.createTask(req.board.id, req.body);
   if (task) {
     broadcastToBoard(req.board.id, "taskCreated", task);
-    res.status(201).json(task);
+    res.status(200).json(task);
   } else {
     res.status(400).json({ error: "Failed to create task" });
   }
@@ -22,11 +22,11 @@ function createTask(req, res) {
 function deleteAllTasksForBoard(req, res) {
   tasksModel.deleteAllTasksForBoard(req.board.id);
 
-  res.json({ message: "All tasks deleted" });
+  res.status(200).json({ message: "All tasks deleted" });
 }
 
 function getTaskById(req, res) {
-  res.json(req.task);
+  res.status(200).json(req.task);
 }
 
 function updateTask(req, res) {
@@ -39,13 +39,13 @@ function updateTask(req, res) {
     req.body
   );
   broadcastToBoard(req.board.id, "taskUpdated", updatedTask);
-  res.json(updatedTask);
+  res.status(200).json(updatedTask);
 }
 
 function deleteTask(req, res) {
   const deletedTask = tasksModel.deleteTask(req.board.id, req.task.id);
   broadcastToBoard(req.board.id, "taskDeleted", deletedTask);
-  res.json(deletedTask);
+  res.status(200).json(deletedTask);
 }
 
 module.exports = {
