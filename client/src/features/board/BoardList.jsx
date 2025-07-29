@@ -3,7 +3,7 @@ import useBoards from "./useBoards";
 import Board from "./Board";
 
 export default function BoardList() {
-  const { boards, isLoading, error, getBoards } = useBoards();
+  const { boards, isLoading, error } = useBoards();
   console.log(boards);
   return (
     <main>
