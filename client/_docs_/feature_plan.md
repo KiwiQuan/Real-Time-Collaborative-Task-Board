@@ -8,27 +8,27 @@ Refactor the app to use a centralized state (via React Context) for boards, and 
 
 ## Checklist
 
-- [ ] **Create BoardsContext**
+- [x] **Create BoardsContext**
 
-  - [ ] Set up `BoardsContext` and `BoardsProvider` in `src/contexts/BoardsContext.jsx`.
-  - [ ] Move board state (`boards`, `isLoading`, `error`) and CRUD actions into the provider.
-  - [ ] Expose state and actions via context.
+  - [x] Set up `BoardsContext` and `BoardsProvider` in `src/contexts/BoardsContext.jsx`.
+  - [x] Move board state (`boards`, `isLoading`, `error`) and CRUD actions into the provider.
+  - [x] Expose state and actions via context.
 
-- [ ] **Refactor useBoards Hook**
+- [x] **Refactor useBoards Hook**
 
-  - [ ] Update `useBoards` to consume context instead of managing its own state.
-  - [ ] Remove local state from `useBoards`.
+  - [x] Update `useBoards` to consume context instead of managing its own state.
+  - [x] Remove local state from `useBoards`.
 
-- [ ] **Manage SSE in Provider**
+- [x] **Manage SSE in Provider**
 
-  - [ ] Move SSE subscription logic (from `useBoardSSE`) into the `BoardsProvider`.
-  - [ ] Subscribe to relevant SSE streams when boards are loaded or selected.
-  - [ ] Update context state directly in SSE event handlers.
+  - [x] Move SSE subscription logic (from `useBoardSSE`) into the `BoardsProvider`.
+  - [x] Subscribe to relevant SSE streams when boards are loaded or selected.
+  - [x] Update context state directly in SSE event handlers.
 
-- [ ] **Update Components**
+- [x] **Update Components**
 
-  - [ ] Refactor components (e.g., `BoardList`, `BoardDetails`) to use context state/actions.
-  - [ ] Remove redundant state or hooks from components.
+  - [x] Refactor components (e.g., `BoardList`, `BoardDetails`) to use context state/actions.
+  - [x] Remove redundant state or hooks from components.
 
 - [ ] **Handle SSE Errors & Reconnection**
 
@@ -38,7 +38,7 @@ Refactor the app to use a centralized state (via React Context) for boards, and 
 
 - [ ] **UI/UX Improvements**
 
-  - [ ] Add a global notification/toast system for real-time events.
+  - [x] Add a global notification/toast system for real-time events.
   - [ ] Optionally, highlight updated items in the UI for a few seconds.
 
 - [ ] **Testing**

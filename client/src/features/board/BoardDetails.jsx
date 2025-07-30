@@ -1,42 +1,48 @@
 import { useParams, useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect } from "react";
 import useBoards from "./useBoards";
-import useBoardSSE from "./useBoardSSE";
+import Notifications from "../../components/Notifications";
 
 export default function BoardDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { boards, updateBoard, deleteBoard } = useBoards();
-  const [notification, setNotification] = useState("");
+  const { boards, setActiveBoardId, isLoading } = useBoards();
   const board = boards.find((board) => board.id === Number(id));
 
-  function onBoardDeleted(data) {
-    setNotification(`This board was deleted by another user`);
-    deleteBoard(data.id);
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
-  }
+  useEffect(() => {
+    setActiveBoardId(Number(id));
 
-  function onBoardUpdated(data) {
-    setNotification(
-      `This board was updated by another user, refresh to see the changes`
-    );
-    updateBoard(data.id, data);
-  }
+    return () => {
+      setActiveBoardId(null);
+    };
+  }, [id]);
 
-  useBoardSSE(id, {
-    onBoardDeleted,
-    onBoardUpdated,
-  });
+  useEffect(() => {
+    if (!isLoading && !board) {
+      const timeout = setTimeout(() => {
+        navigate("/");
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isLoading, board, navigate]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   if (!board) {
-    return <p>Board not found</p>;
+    return (
+      <main>
+        <Notifications />
+        <p>Board not found</p>
+      </main>
+    );
   }
 
   return (
     <main>
-      {notification && <p className="notification">{notification}</p>}
+      <Notifications />
       <h1>{board.name}</h1>
       <p>{board.description}</p>
     </main>
