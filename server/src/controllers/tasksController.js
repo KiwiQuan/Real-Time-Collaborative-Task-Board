@@ -21,8 +21,10 @@ function createTask(req, res) {
 
 function deleteAllTasksForBoard(req, res) {
   tasksModel.deleteAllTasksForBoard(req.board.id);
+  const message = { message: "All tasks deleted" };
+  broadcastToBoard(req.board.id, "allTasksDeleted", message);
 
-  res.status(200).json({ message: "All tasks deleted" });
+  res.status(200).json(message);
 }
 
 function getTaskById(req, res) {

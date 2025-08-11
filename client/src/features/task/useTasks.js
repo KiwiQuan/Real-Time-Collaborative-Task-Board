@@ -13,7 +13,7 @@ export default function useTasks() {
   if (!context) {
     throw new Error("useTasks must be used within a BoardsProvider");
   }
-  const { setError, setIsLoading, setBoards } = context;
+  const { setError, setIsLoading, setNotification } = context;
 
   async function getTaskById(boardId, taskId) {
     try {
@@ -33,13 +33,8 @@ export default function useTasks() {
       setError(null);
       setIsLoading(true);
       const newTask = await createTaskApi(boardId, task);
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === boardId
-            ? { ...board, tasks: [...board.tasks, newTask] }
-            : board
-        )
-      );
+
+      setNotification(`Task "${newTask.title}" created`);
       return newTask;
     } catch (error) {
       setError(error.message || "Failed to create task");
@@ -53,18 +48,8 @@ export default function useTasks() {
       setError(null);
       setIsLoading(true);
       const updatedTask = await updateTaskApi(boardId, taskId, task);
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === boardId
-            ? {
-                ...board,
-                tasks: board.tasks.map((t) =>
-                  t.id === taskId ? updatedTask : t
-                ),
-              }
-            : board
-        )
-      );
+
+      setNotification(`Task "${updatedTask.title}" updated`);
       return updatedTask;
     } catch (error) {
       setError(error.message || "Failed to update task");
@@ -78,14 +63,9 @@ export default function useTasks() {
       setError(null);
       setIsLoading(true);
       const deletedTask = await deleteTaskApi(boardId, taskId);
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === boardId
-            ? { ...board, tasks: board.tasks.filter((t) => t.id !== taskId) }
-            : board
-        )
-      );
-      return deletedTask.name;
+
+      setNotification(`Task "${deletedTask.title}" deleted`);
+      return deletedTask.title;
     } catch (error) {
       setError(error.message || "Failed to delete task");
     } finally {
@@ -98,11 +78,6 @@ export default function useTasks() {
       setError(null);
       setIsLoading(true);
       await deleteAllTasksApi(boardId);
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === boardId ? { ...board, tasks: [] } : board
-        )
-      );
     } catch (error) {
       setError(error.message || "Failed to delete all tasks");
     } finally {

@@ -24,14 +24,21 @@ export default function TaskCreateForm({
 
   return (
     <ModalOverlay onClose={() => setShowCreateTaskModal(false)}>
-      <form onSubmit={handleCreateTask}>
+      <form className="taskCreateForm" onSubmit={handleCreateTask}>
         <label>
           Task Name
-          <input type="text" placeholder="Task Name" name="name" required />
+          <input
+            className="taskName"
+            type="text"
+            placeholder="Task Name"
+            name="name"
+            required
+          />
         </label>
         <label>
           Task Description
           <input
+            className="taskDescription"
             type="text"
             placeholder="Task Description"
             name="description"
@@ -40,9 +47,11 @@ export default function TaskCreateForm({
         </label>
         <label>
           Completed
-          <input type="checkbox" name="completed" />
+          <input className="completed" type="checkbox" name="completed" />
         </label>
-        <button type="submit">Create Task</button>
+        <button className="createTask" type="submit">
+          Create Task
+        </button>
       </form>
     </ModalOverlay>
   );

@@ -21,24 +21,31 @@ export default function BoardList() {
   console.log(boards);
 
   return (
-    <main>
-      <Notifications />
-      <h1>Boards</h1>
-      <button onClick={() => setShowCreateBoardModal(true)}>
-        Create Board
-      </button>
-      {showCreateBoardModal && (
-        <BoardCreateForm
-          setShowCreateBoardModal={setShowCreateBoardModal}
-          createBoard={createBoard}
-        />
-      )}
-      {error && <p>{error}</p>}
-      <ul>
-        {boards.map((board) => (
-          <Board key={board.id} board={board} />
-        ))}
-      </ul>
-    </main>
+    <>
+      <header className="boardHeader">
+        <Notifications />
+        <h1>Boards</h1>
+        <button
+          className="showCreateBoardModal"
+          onClick={() => setShowCreateBoardModal(true)}
+        >
+          Create Board
+        </button>
+        {showCreateBoardModal && (
+          <BoardCreateForm
+            setShowCreateBoardModal={setShowCreateBoardModal}
+            createBoard={createBoard}
+          />
+        )}
+        {error && <p className="boardError">{error}</p>}
+      </header>
+      <main className="boardContent">
+        <ul className="boardList">
+          {boards.map((board) => (
+            <Board key={board.id} board={board} />
+          ))}
+        </ul>
+      </main>
+    </>
   );
 }

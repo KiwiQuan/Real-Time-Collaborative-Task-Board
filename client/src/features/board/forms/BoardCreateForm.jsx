@@ -21,16 +21,25 @@ export default function BoardCreateForm({
 
   return (
     <ModalOverlay onClose={() => setShowCreateBoardModal(false)}>
-      <h2>Create Board</h2>
-      <form onSubmit={handleCreateBoard}>
-        <input type="text" placeholder="Board Name" name="name" required />
+      <h2 className="createBoardTitle">Create Board</h2>
+      <form className="boardCreateForm" onSubmit={handleCreateBoard}>
         <input
+          className="boardName"
+          type="text"
+          placeholder="Board Name"
+          name="name"
+          required
+        />
+        <input
+          className="boardDescription"
           type="text"
           placeholder="Board Description"
           name="description"
           required
         />
-        <button type="submit">Create Board</button>
+        <button className="createBoard" type="submit">
+          Create Board
+        </button>
       </form>
     </ModalOverlay>
   );

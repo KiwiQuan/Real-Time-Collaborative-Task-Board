@@ -3,8 +3,10 @@ import { Link } from "react-router";
 
 export default function Board({ board }) {
   return (
-    <li>
-      <Link to={`/board/${board.id}`}>{board.name}</Link>
+    <li className="boardItem">
+      <Link className="boardLink" to={`/board/${board.id}`}>
+        {board.name}
+      </Link>
     </li>
   );
 }

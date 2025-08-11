@@ -51,6 +51,60 @@ function BoardsProvider({ children }) {
       );
     });
 
+    eventSource.addEventListener("taskDeleted", (event) => {
+      const data = JSON.parse(event.data);
+      setBoards((prevBoards) =>
+        prevBoards.map((board) =>
+          board.id === activeBoardId
+            ? {
+                ...board,
+                tasks: board.tasks.filter((task) => task.id !== data.id),
+              }
+            : board
+        )
+      );
+      setNotification(`Task "${data.title}" was deleted by another user`);
+    });
+
+    eventSource.addEventListener("taskCreated", (event) => {
+      const data = JSON.parse(event.data);
+      setBoards((prevBoards) =>
+        prevBoards.map((board) =>
+          board.id === activeBoardId
+            ? { ...board, tasks: [...board.tasks, data] }
+            : board
+        )
+      );
+      setNotification(`Task "${data.title}" was created by another user`);
+    });
+
+    eventSource.addEventListener("taskUpdated", (event) => {
+      const data = JSON.parse(event.data);
+      setBoards((prevBoards) =>
+        prevBoards.map((board) =>
+          board.id === activeBoardId
+            ? {
+                ...board,
+                tasks: board.tasks.map((task) =>
+                  task.id === data.id ? data : task
+                ),
+              }
+            : board
+        )
+      );
+      setNotification(`Task "${data.title}" was updated by another user`);
+    });
+
+    eventSource.addEventListener("allTasksDeleted", (event) => {
+      const data = JSON.parse(event.data);
+      setBoards((prevBoards) =>
+        prevBoards.map((board) =>
+          board.id === activeBoardId ? { ...board, tasks: [] } : board
+        )
+      );
+      setNotification(data.message);
+    });
+
     eventSource.addEventListener("open", () => {
       setConnectionLost(false);
     });

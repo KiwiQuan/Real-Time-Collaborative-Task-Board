@@ -53,11 +53,7 @@ export default function useBoards() {
       const updatedBoard = await updateBoardApi(id, updates);
       const tasks = boards.find((board) => board.id === id).tasks;
       updatedBoard.tasks = tasks;
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === updatedBoard.id ? updatedBoard : board
-        )
-      );
+
       if (updatedBoard) {
         setNotification(`Board "${updatedBoard.name}" updated`);
       }
@@ -74,7 +70,6 @@ export default function useBoards() {
       setError(null);
       setIsLoading(true);
       const deletedBoard = await deleteBoardApi(id);
-      setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
       if (deletedBoard) {
         setNotification(`Board "${deletedBoard.name}" deleted`);
       }

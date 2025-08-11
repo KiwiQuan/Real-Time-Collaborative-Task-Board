@@ -4,7 +4,6 @@ import TaskList from "../task/TaskList";
 import useBoards from "./useBoards";
 import useTasks from "../task/useTasks";
 import Notifications from "../../components/Notifications";
-import ModalOverlay from "../../components/ModalOverlay";
 import BoardUpdateForm from "./forms/BoardUpdateForm";
 
 export default function BoardDetails() {
@@ -27,7 +26,7 @@ export default function BoardDetails() {
     updateBoard,
     getBoards,
   } = useBoards();
-  const { createTask } = useTasks();
+  const { createTask, deleteAllTasks } = useTasks();
 
   const [board, setBoard] = useState(null);
   const [tasks, setTasks] = useState([]);
@@ -83,31 +82,48 @@ export default function BoardDetails() {
   }
 
   return (
-    <main>
-      <Notifications />
-      {connectionLost && (
-        <div className="connection-lost">
-          <p>Connection lost</p>
-          <p>Attempting to reconnect...</p>
+    <>
+      <header className="board-header">
+        <div className="board-header-content">
+          <div className="board-header-notifications">
+            <Notifications />
+          </div>
+
+          {connectionLost && (
+            <div className="connection-lost">
+              <p>Connection lost</p>
+              <p>Attempting to reconnect...</p>
+            </div>
+          )}
+          <h1 className="board-header-title">{board.name}</h1>
+          <p className="board-header-description">{board.description}</p>
+          <button
+            className="showBoardEditModal"
+            onClick={() => setShowEditBoardModal(true)}
+          >
+            Edit Board
+          </button>
+          {showEditBoardModal && (
+            <BoardUpdateForm
+              board={board}
+              setShowEditBoardModal={setShowEditBoardModal}
+              error={error}
+              updateBoard={updateBoard}
+              setShowCreateTaskModal={setShowCreateTaskModal}
+              showCreateTaskModal={showCreateTaskModal}
+              createTask={createTask}
+              deleteBoard={deleteBoard}
+              deleteAllTasks={deleteAllTasks}
+            />
+          )}
+          <Link className="back-to-boards" to="/">
+            Back to boards
+          </Link>
         </div>
-      )}
-      <h1>{board.name}</h1>
-      <p>{board.description}</p>
-      <button onClick={() => setShowEditBoardModal(true)}>Edit Board</button>
-      {showEditBoardModal && (
-        <BoardUpdateForm
-          board={board}
-          setShowEditBoardModal={setShowEditBoardModal}
-          error={error}
-          updateBoard={updateBoard}
-          setShowCreateTaskModal={setShowCreateTaskModal}
-          showCreateTaskModal={showCreateTaskModal}
-          createTask={createTask}
-          deleteBoard={deleteBoard}
-        />
-      )}
-      <Link to="/">Back to boards</Link>
-      {tasks?.length > 0 && <TaskList tasks={tasks} boardId={board.id} />}
-    </main>
+      </header>
+      <main className="taskList">
+        {tasks?.length > 0 && <TaskList tasks={tasks} boardId={board.id} />}
+      </main>
+    </>
   );
 }
