@@ -23,19 +23,19 @@
 ## 2. Frontend (React + Vite)
 
 - [x] Set up React app structure (`client/`)
-- [ ] Build UI for:
-  - [ ] Viewing boards and tasks
-  - [ ] Creating boards and tasks
-  - [ ] Editing and deleting tasks
+- [x] Build UI for:
+  - [x] Viewing boards and tasks
+  - [x] Creating boards and tasks
+  - [x] Editing and deleting tasks
   - [ ] Entering a username (optional for MVP)
-- [ ] Connect to backend REST API for CRUD operations
-- [ ] Connect to SSE endpoint for real-time updates
-- [ ] Update UI in real time when SSE events are received
+- [x] Connect to backend REST API for CRUD operations
+- [x] Connect to SSE endpoint for real-time updates
+- [x] Update UI in real time when SSE events are received
 
 ## 3. Testing & Polish
 
-- [ ] Test with multiple tabs to simulate multiple users
-- [ ] Add visual cues for real-time updates
+- [x] Test with multiple tabs to simulate multiple users
+- [x] Add visual cues for real-time updates
 - [ ] Refactor and document code
 
 ## 4. Future Enhancements (After MVP)
