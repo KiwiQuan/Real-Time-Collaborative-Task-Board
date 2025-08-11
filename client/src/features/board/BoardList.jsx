@@ -1,16 +1,38 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import useBoards from "./useBoards";
 import Board from "./Board";
 import Notifications from "../../components/Notifications";
+import BoardCreateForm from "./forms/BoardCreateForm";
 
 export default function BoardList() {
-  const { boards, isLoading, error } = useBoards();
+  useEffect(() => {
+    console.log("BoardList mounted");
+
+    return () => {
+      console.log("BoardList unmounted");
+    };
+  }, []);
+  const { boards, isLoading, error, createBoard } = useBoards();
+  const [showCreateBoardModal, setShowCreateBoardModal] = useState(false);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   console.log(boards);
+
   return (
     <main>
       <Notifications />
       <h1>Boards</h1>
-      {isLoading && <p>Loading...</p>}
+      <button onClick={() => setShowCreateBoardModal(true)}>
+        Create Board
+      </button>
+      {showCreateBoardModal && (
+        <BoardCreateForm
+          setShowCreateBoardModal={setShowCreateBoardModal}
+          createBoard={createBoard}
+        />
+      )}
       {error && <p>{error}</p>}
       <ul>
         {boards.map((board) => (

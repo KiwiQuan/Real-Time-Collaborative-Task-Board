@@ -1,11 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import {
-  getBoards as getBoardsApi,
-  getBoard as getBoardApi,
-  createBoard as createBoardApi,
-  updateBoard as updateBoardApi,
-  deleteBoard as deleteBoardApi,
-} from "../services/boardApi";
+import { createContext, useState, useEffect, useRef } from "react";
+import { getBoards as getBoardsApi } from "../services/boardApi";
+import { getTasks as getTasksApi } from "../services/taskApi";
 
 const BoardsContext = createContext();
 
@@ -13,11 +8,13 @@ function BoardsProvider({ children }) {
   const [boards, setBoards] = useState([]);
   const [activeBoardId, setActiveBoardId] = useState(null);
   const [notification, setNotification] = useState(null);
+  const [connectionLost, setConnectionLost] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const boardsRef = useRef(boards);
   useEffect(() => {
-    getBoards();
-  }, []);
+    boardsRef.current = boards;
+  }, [boards]);
 
   useEffect(() => {
     if (!activeBoardId) return;
@@ -35,6 +32,17 @@ function BoardsProvider({ children }) {
 
     eventSource.addEventListener("boardUpdated", (event) => {
       const data = JSON.parse(event.data);
+      const board = boardsRef.current.find((board) => board.id === data.id);
+      if (!board) {
+        console.warn(
+          "Board not found for SSE update:",
+          data.id,
+          boardsRef.current
+        );
+        return;
+      }
+      const tasks = board ? board.tasks : [];
+      data.tasks = tasks;
       setBoards((prevBoards) =>
         prevBoards.map((board) => (board.id === data.id ? data : board))
       );
@@ -42,9 +50,24 @@ function BoardsProvider({ children }) {
         `This board was updated by another user, you may need to refresh to see the changes`
       );
     });
-    console.log("board details rendered");
+
+    eventSource.addEventListener("open", () => {
+      setConnectionLost(false);
+    });
+
+    eventSource.addEventListener("error", (e) => {
+      if (eventSource.readyState === 2) {
+        setConnectionLost(true);
+      }
+    });
+
+    console.log("board broadcast event source connected");
     return () => eventSource.close();
   }, [activeBoardId]);
+
+  useEffect(() => {
+    getBoards();
+  }, []);
 
   async function getBoards() {
     try {
@@ -52,6 +75,7 @@ function BoardsProvider({ children }) {
       setIsLoading(true);
       const boards = await getBoardsApi();
       setBoards(boards);
+      await Promise.all(boards.map((board) => getTasks(board.id)));
       return boards;
     } catch (error) {
       setError(error.message || "Failed to fetch boards");
@@ -59,61 +83,20 @@ function BoardsProvider({ children }) {
       setIsLoading(false);
     }
   }
-  async function getBoard(id) {
-    try {
-      setError(null);
-      setIsLoading(true);
-      const board = await getBoardApi(id);
-      return board;
-    } catch (error) {
-      setError(error.message || "Failed to fetch board");
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
-  async function createBoard(board) {
+  async function getTasks(boardId) {
     try {
       setError(null);
       setIsLoading(true);
-      const newBoard = await createBoardApi(board);
-      setBoards((prevBoards) => [...prevBoards, newBoard]);
-      return newBoard;
-    } catch (error) {
-      setError(error.message || "Failed to create board");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function updateBoard(id, updates) {
-    try {
-      setError(null);
-      setIsLoading(true);
-      const updatedBoard = await updateBoardApi(id, updates);
+      const tasks = await getTasksApi(boardId);
       setBoards((prevBoards) =>
         prevBoards.map((board) =>
-          board.id === updatedBoard.id ? updatedBoard : board
+          board.id === boardId ? { ...board, tasks: tasks || [] } : board
         )
       );
-
-      return updatedBoard;
+      return tasks;
     } catch (error) {
-      setError(error.message || "Failed to update board");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function deleteBoard(id) {
-    try {
-      setError(null);
-      setIsLoading(true);
-      const deletedBoard = await deleteBoardApi(id);
-      setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
-      return deletedBoard.name;
-    } catch (error) {
-      setError(error.message || "Failed to delete board");
+      setError(error.message || "Failed to fetch tasks");
     } finally {
       setIsLoading(false);
     }
@@ -123,16 +106,17 @@ function BoardsProvider({ children }) {
     <BoardsContext.Provider
       value={{
         boards,
+
+        getBoards,
+        setBoards,
         setActiveBoardId,
         isLoading,
         error,
-        getBoards,
-        getBoard,
-        createBoard,
-        updateBoard,
-        deleteBoard,
+        setError,
+        setIsLoading,
         notification,
         setNotification,
+        connectionLost,
       }}
     >
       {children}

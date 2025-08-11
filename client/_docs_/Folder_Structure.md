@@ -7,6 +7,10 @@ This document explains the purpose of each folder in the React frontend project.
   - **assets/**: Images, SVGs, and other static resources used in the app.
   - **components/**: Reusable UI components (e.g., Button, Modal).
   - **features/**: Feature-specific folders (e.g., board, task) containing related components, logic, and API calls.
+    - **board/**: Board-related components, logic, and API calls.
+      - **forms/**: Form components for creating and updating boards.
+    - **task/**: Task-related components, logic, and API calls.
+      - **forms/**: Form components for creating and updating tasks.
   - **hooks/**: Custom React hooks for reusable logic.
   - **services/**: API and SSE logic (e.g., `api.js`, `sse.js`).
   - **utils/**: Helper functions used across the app.
