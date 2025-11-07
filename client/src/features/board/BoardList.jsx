@@ -22,9 +22,9 @@ export default function BoardList() {
 
   return (
     <>
-      <header className="boardHeader">
+      <header className="boardHeader flex flex-col items-center gap-4 py-6 bg-gray-50 border-b">
         <Notifications />
-        <h1>Boards</h1>
+        <h1 className="text-4xl font-bold">Boards</h1>
         <button
           className="showCreateBoardModal"
           onClick={() => setShowCreateBoardModal(true)}

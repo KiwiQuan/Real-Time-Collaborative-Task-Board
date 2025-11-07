@@ -6,6 +6,7 @@ This document explains the purpose of each folder in the React frontend project.
 - **src/**: Source code for the React app.
   - **assets/**: Images, SVGs, and other static resources used in the app.
   - **components/**: Reusable UI components (e.g., Button, Modal).
+  - **contexts/**: Contexts for managing state, API calls, and SSE.
   - **features/**: Feature-specific folders (e.g., board, task) containing related components, logic, and API calls.
     - **board/**: Board-related components, logic, and API calls.
       - **forms/**: Form components for creating and updating boards.
