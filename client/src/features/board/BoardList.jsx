@@ -22,11 +22,11 @@ export default function BoardList() {
 
   return (
     <>
-      <header className="boardHeader flex flex-col items-center gap-4 py-6 bg-gray-50 border-b">
+      <header className="boardHeader flex flex-col shadow items-center basis-1/4 gap-4 py-6 mb-5 bg-gray-50 border-b border-gray-200">
         <Notifications />
         <h1 className="text-4xl font-bold">Boards</h1>
         <button
-          className="showCreateBoardModal"
+          className="showCreateBoardModal rounded-lg text-black text-base px-5 py-5 bg-red-300 font-medium shadow hover:bg-blue-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
           onClick={() => setShowCreateBoardModal(true)}
         >
           Create Board
@@ -40,7 +40,7 @@ export default function BoardList() {
         {error && <p className="boardError">{error}</p>}
       </header>
       <main className="boardContent">
-        <ul className="boardList">
+        <ul className="boardList flex flex-col gap-4 bg-blue-500">
           {boards.map((board) => (
             <Board key={board.id} board={board} />
           ))}
