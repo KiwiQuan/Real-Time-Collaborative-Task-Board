@@ -39,8 +39,8 @@ export default function BoardList() {
         )}
         {error && <p className="boardError">{error}</p>}
       </header>
-      <main className="boardContent flex">
-        <ul className="boardList flex flex-col gap-4 mx-5 grow">
+      <main className="boardContent flex basis-full">
+        <ul className="boardList flex flex-col gap-4 mx-5 w-full">
           {boards.map((board) => (
             <Board key={board.id} board={board} />
           ))}

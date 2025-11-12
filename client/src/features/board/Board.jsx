@@ -3,9 +3,9 @@ import { Link } from "react-router";
 
 export default function Board({ board }) {
   return (
-    <li className="boardItem px-5 rounded- border border-gray-300 shadow-sm flex bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+    <li className="boardItem px-5 rounded- border border-gray-300 shadow-sm flex bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors mb-5 min-h-[100px]">
       <Link
-        className="boardLink font-medium text-2xl grow"
+        className="boardLink font-medium text-2xl size-full flex items-center"
         to={`/board/${board.id}`}
       >
         {board.name}
