@@ -26,7 +26,7 @@ export default function BoardList() {
         <Notifications />
         <h1 className="text-4xl font-bold">Boards</h1>
         <button
-          className="showCreateBoardModal rounded-lg text-black text-base px-5 py-5 bg-blue-300 font-medium shadow hover:bg-blue-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+          className="showCreateBoardModal rounded-lg text-black text-base px-5 py-5 bg-blue-300 font-medium shadow hover:bg-blue-200 hover:scale-105 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition delay-100 duration-250 ease-in-out"
           onClick={() => setShowCreateBoardModal(true)}
         >
           Create Board
