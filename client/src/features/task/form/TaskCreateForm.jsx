@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalOverlay from "../../../components/ModalOverlay";
 
 export default function TaskCreateForm({
   setShowCreateTaskModal,
+  setShowEditBoardModal,
   createTask,
   board,
 }) {
+  useEffect(() => {
+    setShowEditBoardModal(false);
+  }, []);
   async function handleCreateTask(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,6 +19,7 @@ export default function TaskCreateForm({
     const task = { title, description, completed };
     console.log(task);
     setShowCreateTaskModal(false);
+    setShowEditBoardModal(false);
     try {
       await createTask(board.id, task);
     } catch (error) {

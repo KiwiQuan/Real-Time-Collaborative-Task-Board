@@ -1,6 +1,5 @@
 import React from "react";
 import ModalOverlay from "../../../components/ModalOverlay";
-import TaskCreateForm from "../../task/form/TaskCreateForm";
 import { useState } from "react";
 
 export default function BoardUpdateForm({
@@ -9,8 +8,7 @@ export default function BoardUpdateForm({
   setShowCreateTaskModal,
   error,
   updateBoard,
-  showCreateTaskModal,
-  createTask,
+
   deleteBoard,
   deleteAllTasks,
 }) {
@@ -34,70 +32,66 @@ export default function BoardUpdateForm({
   }
 
   return (
-    <ModalOverlay onClose={() => setShowEditBoardModal(false)}>
-      {error && <p>{error}</p>}
-      <form className="boardUpdateForm" onSubmit={handleUpdateBoard}>
-        <label>
-          <input
-            className="boardName"
-            type="text"
-            placeholder={board.name}
-            name="name"
-          />
-        </label>
-        <label>
-          <input
-            className="boardDescription"
-            type="text"
-            placeholder={board.description}
-            name="description"
-          />
-        </label>
-        <button className="updateBoard" type="submit">
-          Update Board
+    <>
+      <ModalOverlay onClose={() => setShowEditBoardModal(false)}>
+        {error && <p>{error}</p>}
+        <form className="boardUpdateForm" onSubmit={handleUpdateBoard}>
+          <label>
+            <input
+              className="boardName"
+              type="text"
+              placeholder={board.name}
+              name="name"
+            />
+          </label>
+          <label>
+            <input
+              className="boardDescription"
+              type="text"
+              placeholder={board.description}
+              name="description"
+            />
+          </label>
+          <button className="updateBoard" type="submit">
+            Update Board
+          </button>
+        </form>
+        <button
+          className="showCreateTaskModal"
+          onClick={() => setShowCreateTaskModal(true)}
+        >
+          Create Task
         </button>
-      </form>
-      <button
-        className="showCreateTaskModal"
-        onClick={() => setShowCreateTaskModal(true)}
-      >
-        Create Task
-      </button>
-      {showCreateTaskModal && (
-        <TaskCreateForm
-          setShowCreateTaskModal={setShowCreateTaskModal}
-          createTask={createTask}
-          board={board}
-        />
-      )}
-      <button className="deleteBoard" onClick={() => deleteBoard(board.id)}>
-        Delete Board
-      </button>
-      <button
-        className="showDeleteAllTasksModal"
-        onClick={() => setShowDeleteAllTasksModal(true)}
-      >
-        Delete All Tasks
-      </button>
-      {showDeleteAllTasksModal && (
-        <ModalOverlay onClose={() => setShowDeleteAllTasksModal(false)}>
-          <p className="confirmationMessage">
-            Are you sure you want to delete all tasks?
-          </p>
-          <button
-            className="deleteAllTasks"
-            onClick={() => deleteAllTasks(board.id)}
-          >
-            Yes
-          </button>
-          <button
-            className="cancelDeleteAllTasks"
-            onClick={() => setShowDeleteAllTasksModal(false)}
-          >
-            No
-          </button>
-        </ModalOverlay>
-      )}
-    </ModalOverlay>
+
+        <button className="deleteBoard" onClick={() => deleteBoard(board.id)}>
+          Delete Board
+        </button>
+        <button
+          className="showDeleteAllTasksModal"
+          onClick={() => setShowDeleteAllTasksModal(true)}
+        >
+          Delete All Tasks
+        </button>
+        {showDeleteAllTasksModal && (
+          <ModalOverlay onClose={() => setShowDeleteAllTasksModal(false)}>
+            <p className="confirmationMessage">
+              Are you sure you want to delete all tasks?
+            </p>
+            <button
+              className="deleteAllTasks"
+              onClick={() => deleteAllTasks(board.id)}
+            >
+              Yes
+            </button>
+            <button
+              className="cancelDeleteAllTasks"
+              onClick={() => setShowDeleteAllTasksModal(false)}
+            >
+              No
+            </button>
+          </ModalOverlay>
+        )}
+      </ModalOverlay>
+    </>
   );
 }

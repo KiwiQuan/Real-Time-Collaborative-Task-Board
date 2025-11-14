@@ -5,6 +5,7 @@ import useBoards from "./useBoards";
 import useTasks from "../task/useTasks";
 import Notifications from "../../components/Notifications";
 import BoardUpdateForm from "./forms/BoardUpdateForm";
+import TaskCreateForm from "../task/form/TaskCreateForm";
 
 export default function BoardDetails() {
   useEffect(() => {
@@ -114,6 +115,14 @@ export default function BoardDetails() {
               createTask={createTask}
               deleteBoard={deleteBoard}
               deleteAllTasks={deleteAllTasks}
+            />
+          )}
+          {showCreateTaskModal && (
+            <TaskCreateForm
+              setShowEditBoardModal={setShowEditBoardModal}
+              setShowCreateTaskModal={setShowCreateTaskModal}
+              createTask={createTask}
+              board={board}
             />
           )}
           <Link className="back-to-boards" to="/">
