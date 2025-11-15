@@ -21,24 +21,32 @@ export default function BoardCreateForm({
 
   return (
     <ModalOverlay onClose={() => setShowCreateBoardModal(false)}>
-      <div className="boardModalContent">
-        <h2 className="createBoardTitle">Create Board</h2>
-        <form className="boardCreateForm" onSubmit={handleCreateBoard}>
+      <div className="boardModalContent flex flex-col gap-4">
+        <h2 className="createBoardTitle text-2xl font-bold self-center">
+          Create Board
+        </h2>
+        <form
+          className="boardCreateForm flex flex-col gap-6"
+          onSubmit={handleCreateBoard}
+        >
           <input
-            className="boardName"
+            className="boardName text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
             type="text"
             placeholder="Board Name"
             name="name"
             required
           />
           <input
-            className="boardDescription"
+            className="boardDescription text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
             type="text"
             placeholder="Board Description"
             name="description"
             required
           />
-          <button className="createBoard" type="submit">
+          <button
+            className="createBoard text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
+            type="submit"
+          >
             Create Board
           </button>
         </form>

@@ -111,8 +111,6 @@ export default function BoardDetails() {
               error={error}
               updateBoard={updateBoard}
               setShowCreateTaskModal={setShowCreateTaskModal}
-              showCreateTaskModal={showCreateTaskModal}
-              createTask={createTask}
               deleteBoard={deleteBoard}
               deleteAllTasks={deleteAllTasks}
             />

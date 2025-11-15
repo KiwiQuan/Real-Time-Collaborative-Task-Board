@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ModalOverlay({ onClose, children }) {
   const handleOverlayClick = (e) => {
-    if (e.target.classList.contains("modal-overlay" || "modal-content")) {
+    if (e.target.classList.contains("modal-overlay")) {
       console.log(e.target.classList);
       if (onClose) onClose();
     }
@@ -18,7 +18,7 @@ export default function ModalOverlay({ onClose, children }) {
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="modal-close self-start"
+          className="modal-close self-start text-2xl font-bold"
           type="button"
           aria-label="Close"
           onClick={onClose}
