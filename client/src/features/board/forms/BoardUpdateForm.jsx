@@ -36,17 +36,17 @@ export default function BoardUpdateForm({
       <ModalOverlay onClose={() => setShowEditBoardModal(false)}>
         {error && <p>{error}</p>}
         <div className="boardUpdateContainer flex gap-9">
-          <div className="boardUpdateFormContent">
-            <h2 className="boardUpdateTitle text-2xl font-bold mb-8">
+          <div className="boardUpdateFormContent flex flex-col">
+            <h2 className="boardUpdateTitle text-2xl font-bold mb-8 self-center">
               Update Board
             </h2>
             <form
-              className="boardUpdateForm flex flex-col gap-4 border-r pr-9 border-gray-300"
+              className="boardUpdateForm flex flex-col gap-4"
               onSubmit={handleUpdateBoard}
             >
               <label>
                 <input
-                  className="boardName"
+                  className="boardName text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
                   type="text"
                   placeholder={board.name}
                   name="name"
@@ -54,13 +54,16 @@ export default function BoardUpdateForm({
               </label>
               <label>
                 <input
-                  className="boardDescription"
+                  className="boardDescription text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
                   type="text"
                   placeholder={board.description}
                   name="description"
                 />
               </label>
-              <button className="updateBoard" type="submit">
+              <button
+                className="updateBoard text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
+                type="submit"
+              >
                 Update Board
               </button>
             </form>
