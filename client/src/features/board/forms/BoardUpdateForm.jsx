@@ -61,7 +61,7 @@ export default function BoardUpdateForm({
                 />
               </label>
               <button
-                className="updateBoard text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
+                className="updateBoard text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 cursor-pointer"
                 type="submit"
               >
                 Update Board
@@ -74,20 +74,20 @@ export default function BoardUpdateForm({
             </h2>
             <div className="boardOptionsButtons flex flex-col gap-4">
               <button
-                className="showCreateTaskModal"
+                className="showCreateTaskModal text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                 onClick={() => setShowCreateTaskModal(true)}
               >
                 Create Task
               </button>
 
               <button
-                className="deleteBoard"
+                className="deleteBoard text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                 onClick={() => deleteBoard(board.id)}
               >
                 Delete Board
               </button>
               <button
-                className="showDeleteAllTasksModal"
+                className="showDeleteAllTasksModal text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                 onClick={() => setShowDeleteAllTasksModal(true)}
               >
                 Delete All Tasks
@@ -102,13 +102,13 @@ export default function BoardUpdateForm({
                 Are you sure you want to delete all tasks?
               </p>
               <button
-                className="deleteAllTasks"
+                className="deleteAllTasks cursor-pointer text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 w-1/4"
                 onClick={() => deleteAllTasks(board.id)}
               >
                 Yes
               </button>
               <button
-                className="cancelDeleteAllTasks"
+                className="cancelDeleteAllTasks cursor-pointer text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 w-1/4"
                 onClick={() => setShowDeleteAllTasksModal(false)}
               >
                 No
