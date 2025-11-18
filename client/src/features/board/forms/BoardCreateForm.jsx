@@ -43,13 +43,12 @@ export default function BoardCreateForm({
               name="name"
               required
             />
-            <input
-              className="boardDescription text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
-              type="text"
+            <textarea
+              className="boardDescription text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 resize-none h-24 w-full"
               placeholder="Board Description"
               name="description"
               required
-            />
+            ></textarea>
             <button
               className="createBoard text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
               type="submit"
