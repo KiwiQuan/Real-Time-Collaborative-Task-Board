@@ -84,26 +84,38 @@ export default function BoardDetails() {
 
   return (
     <>
-      <header className="board-header">
-        <div className="board-header-content">
+      <header className="board-header flex flex-col gap-4 grow">
+        <div className="board-header-content flex flex-col gap-4 items-center grow">
           <div className="board-header-notifications">
             <Notifications />
           </div>
 
           {connectionLost && (
-            <div className="connection-lost">
-              <p>Connection lost</p>
-              <p>Attempting to reconnect...</p>
+            <div className="connection-lost text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100">
+              <p className="connection-lost-text">Connection lost</p>
+              <p className="connection-lost-text">Attempting to reconnect...</p>
             </div>
           )}
-          <h1 className="board-header-title">{board.name}</h1>
-          <p className="board-header-description">{board.description}</p>
-          <button
-            className="showBoardEditModal"
-            onClick={() => setShowEditBoardModal(true)}
+          <h1 className="board-header-title text-2xl font-bold">
+            {board.name}
+          </h1>
+          <textarea
+            readOnly
+            className="board-header-description bg-gray-100 w-250 h-100 resize-none focus:outline-none rounded-md p-2 border border-gray-300"
           >
-            Edit Board
-          </button>
+            {board.description}
+          </textarea>
+          <div className="board-header-buttons flex gap-4">
+            <button
+              className="showBoardEditModal cursor-pointer"
+              onClick={() => setShowEditBoardModal(true)}
+            >
+              Edit Board
+            </button>
+            <Link className="back-to-boards" to="/">
+              Back to boards
+            </Link>
+          </div>
           {showEditBoardModal && (
             <BoardUpdateForm
               board={board}
@@ -123,12 +135,9 @@ export default function BoardDetails() {
               board={board}
             />
           )}
-          <Link className="back-to-boards" to="/">
-            Back to boards
-          </Link>
         </div>
       </header>
-      <main className="taskList">
+      <main className="taskList flex flex-col gap-4 grow">
         {tasks?.length > 0 && <TaskList tasks={tasks} boardId={board.id} />}
       </main>
     </>

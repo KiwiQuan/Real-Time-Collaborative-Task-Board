@@ -34,7 +34,11 @@ export default function BoardUpdateForm({
   return (
     <>
       <ModalOverlay onClose={() => setShowEditBoardModal(false)}>
-        {error && <p>{error}</p>}
+        {error && (
+          <p className="error text-red-500 text-lg font-medium text-center">
+            {error}
+          </p>
+        )}
         <div className="boardUpdateContainer flex gap-9">
           <div className="boardUpdateFormContent flex flex-col">
             <h2 className="boardUpdateTitle text-2xl font-bold mb-8 self-center">
@@ -45,6 +49,7 @@ export default function BoardUpdateForm({
               onSubmit={handleUpdateBoard}
             >
               <label>
+                <p className="boardNameText text-lg">Board Name:</p>
                 <input
                   className="boardName text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
                   type="text"
@@ -53,6 +58,9 @@ export default function BoardUpdateForm({
                 />
               </label>
               <label>
+                <p className="boardDescriptionText text-lg">
+                  Board Description:
+                </p>
                 <textarea
                   className="boardDescription text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 resize-none h-24 w-full"
                   placeholder={board.description}

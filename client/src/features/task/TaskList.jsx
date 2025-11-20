@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function TaskList({ tasks, boardId }) {
   return (
-    <ul className="taskList">
+    <ul className="taskList flex flex-col gap-4">
       {tasks.map((task) => (
         <Task key={uuidv4()} task={task} boardId={boardId} />
       ))}

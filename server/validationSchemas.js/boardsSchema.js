@@ -11,7 +11,7 @@ const boardCreateSchema = Joi.object({
 
 const boardUpdateSchema = Joi.object({
   name: Joi.string().min(1).max(255),
-  description: Joi.string().min(1).max(255),
+  description: Joi.string().min(1),
 });
 
 module.exports = { boardCreateSchema, boardIdSchema, boardUpdateSchema };
