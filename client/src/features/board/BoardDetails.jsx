@@ -49,12 +49,6 @@ export default function BoardDetails() {
   }, [id]);
 
   useEffect(() => {
-    console.log(isLoading);
-
-    console.log(board);
-  }, [isLoading, board, tasks]);
-
-  useEffect(() => {
     if (!isLoading && !board) {
       const timeout = setTimeout(() => {
         navigate("/");

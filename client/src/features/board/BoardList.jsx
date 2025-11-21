@@ -6,20 +6,12 @@ import BoardCreateForm from "./forms/BoardCreateForm";
 import PlusSign from "../../assets/PlusSign";
 
 export default function BoardList() {
-  useEffect(() => {
-    console.log("BoardList mounted");
-
-    return () => {
-      console.log("BoardList unmounted");
-    };
-  }, []);
   const { boards, isLoading, error, createBoard } = useBoards();
   const [showCreateBoardModal, setShowCreateBoardModal] = useState(false);
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
-  console.log(boards.length);
 
   return (
     <>
@@ -43,8 +35,8 @@ export default function BoardList() {
         )}
         {error && <p className="boardError">{error}</p>}
       </header>
-      <main className="boardContent flex basis-full">
-        <ul className="boardList flex flex-col gap-4 mx-5 w-full">
+      <main className="boardContent flex basis-full justify-center">
+        <ul className="boardList flex flex-wrap gap-6 mx-5 basis-full justify-center">
           {boards.map((board) => (
             <Board key={board.id} board={board} />
           ))}
