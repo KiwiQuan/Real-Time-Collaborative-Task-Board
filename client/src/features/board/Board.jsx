@@ -20,15 +20,14 @@ export default function Board({ board, deleteBoard, getBoards }) {
         >
           <div className="flex flex-col gap-2 relative">
             <p className="text-2xl font-medium">{board.name}</p>
-            <button
+
+            <TrashCan
               onClick={(e) => {
                 setShowDeleteBoardModal(true);
                 e.preventDefault();
               }}
-              className="trashCanButton hover:bg-red-100 p-1 rounded-md absolute opacity-0 rounded-md group-hover:opacity-100 transition-opacity right-2 top-7"
-            >
-              <TrashCan className="size-5 stroke-red-500 cursor-default transition duration-200 ease-in-out" />
-            </button>
+              className="trashCanButton size-7 hover:bg-red-100 p-1 rounded-md absolute opacity-0 rounded-md group-hover:opacity-100 transition-opacity right-2 top-7 stroke-red-500 cursor-default transition duration-200 ease-in-out"
+            />
           </div>
 
           <p className="text-gray-500 text-sm truncate w-full">
