@@ -1,6 +1,7 @@
 import React from "react";
+import XSign from "../assets/XSign";
 
-export default function ModalOverlay({ onClose, children }) {
+export default function ModalOverlay({ onClose, children, title }) {
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("modal-overlay")) {
       console.log(e.target.classList);
@@ -14,17 +15,20 @@ export default function ModalOverlay({ onClose, children }) {
       onClick={handleOverlayClick}
     >
       <div
-        className="max-w-lg w-full bg-white flex flex-col gap-4 rounded-lg shadow-lg px-6 pt-4 pb-9 z-50"
+        className="max-w-lg w-full bg-white flex flex-col gap-10 rounded-lg shadow-lg px-6 pt-4 pb-9 z-50"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="modal-close text-2xl self-end font-bold cursor-pointer"
-          type="button"
-          aria-label="Close"
-          onClick={onClose}
-        >
-          &times;
-        </button>
+        <div className="modal-header flex justify-between">
+          {title && <h2 className="modal-title text-2xl font-bold">{title}</h2>}
+          <button
+            className="modal-close cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-md p-1"
+            type="button"
+            aria-label="Close"
+            onClick={onClose}
+          >
+            <XSign className="size-6 stroke-gray-600 hover:stroke-gray-700 transition-colors duration-200" />
+          </button>
+        </div>
         {children}
       </div>
     </div>

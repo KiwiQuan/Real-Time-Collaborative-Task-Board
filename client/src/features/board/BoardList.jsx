@@ -6,7 +6,8 @@ import BoardCreateForm from "./forms/BoardCreateForm";
 import PlusSign from "../../assets/PlusSign";
 
 export default function BoardList() {
-  const { boards, isLoading, error, createBoard } = useBoards();
+  const { boards, isLoading, error, createBoard, deleteBoard, getBoards } =
+    useBoards();
   const [showCreateBoardModal, setShowCreateBoardModal] = useState(false);
 
   if (isLoading) {
@@ -18,7 +19,7 @@ export default function BoardList() {
       <header className="boardHeader flex justify-around shadow items-center basis-1/4 gap-4 py-6 mb-5 bg-gray-50 border-b border-gray-200">
         <Notifications />
         <div className="boardCount text-lg font-medium">
-          <h1 className="text-4xl font-bold">Boards</h1>
+          <h1 className="text-4xl font-bold">My Boards</h1>
           <p className="text-gray-500">{boards.length} boards</p>
         </div>
         <button
@@ -35,10 +36,15 @@ export default function BoardList() {
         )}
         {error && <p className="boardError">{error}</p>}
       </header>
-      <main className="boardContent flex basis-full justify-center">
-        <ul className="boardList flex flex-wrap gap-6 mx-5 basis-full justify-center">
+      <main className="boardContent flex basis-full">
+        <ul className="boardList grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-7 grow">
           {boards.map((board) => (
-            <Board key={board.id} board={board} />
+            <Board
+              key={board.id}
+              board={board}
+              deleteBoard={deleteBoard}
+              getBoards={getBoards}
+            />
           ))}
         </ul>
       </main>
