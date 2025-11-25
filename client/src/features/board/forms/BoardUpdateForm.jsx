@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function BoardUpdateForm({
   board,
   setShowEditBoardModal,
-  setShowCreateTaskModal,
   error,
   updateBoard,
 
@@ -80,13 +79,6 @@ export default function BoardUpdateForm({
               Board Options
             </h2>
             <div className="boardOptionsButtons flex flex-col gap-4">
-              <button
-                className="showCreateTaskModal text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-                onClick={() => setShowCreateTaskModal(true)}
-              >
-                Create Task
-              </button>
-
               <button
                 className="deleteBoard text-lg font-medium p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                 onClick={() => deleteBoard(board.id)}

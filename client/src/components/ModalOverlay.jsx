@@ -20,14 +20,10 @@ export default function ModalOverlay({ onClose, children, title }) {
       >
         <div className="modal-header flex justify-between">
           {title && <h2 className="modal-title text-2xl font-bold">{title}</h2>}
-          <button
-            className="modal-close cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-md p-1"
-            type="button"
-            aria-label="Close"
+          <XSign
+            className="modal-close cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-md p-1 size-7 stroke-gray-600 hover:stroke-gray-700 transition-colors duration-200"
             onClick={onClose}
-          >
-            <XSign className="size-6 stroke-gray-600 hover:stroke-gray-700 transition-colors duration-200" />
-          </button>
+          />
         </div>
         {children}
       </div>
