@@ -90,7 +90,7 @@ export default function BoardDetails() {
             >
               <BackArrow className="size-4" /> Back to boards
             </Link>
-            <div className="board-header-content flex flex-col w-full">
+            <div className="board-header-content flex flex-col w-full justify-center items-center gap-4 sm:items-stretch">
               <div className="board-header-notifications">
                 <Notifications />
               </div>
@@ -103,11 +103,11 @@ export default function BoardDetails() {
                   </p>
                 </div>
               )}
-              <div className="board-header-title-container flex gap-4 justify-between">
+              <div className="board-header-title-container flex gap-4 justify-center items-center flex-col sm:flex-row sm:justify-between">
                 <h1 className="board-header-title text-2xl font-bold">
                   {board.name}
                 </h1>
-                <div className="board-header-buttons flex gap-4 items-center">
+                <div className="board-header-buttons flex gap-4 items-center flex-col sm:flex-row">
                   <button
                     className="showBoardEditModal cursor-pointer flex items-center gap-2 hover:bg-gray-200 rounded-md p-2 text-sm"
                     onClick={() => setShowEditBoardModal(true)}
@@ -124,12 +124,12 @@ export default function BoardDetails() {
               </div>
               <textarea
                 readOnly
-                className="board-header-description text-gray-500 resize-none focus:outline-none"
+                className="board-header-description self-start text-gray-500 resize-none focus:outline-none"
                 rows={2}
               >
                 {board.description}
               </textarea>
-              <p className="text-gray-500">{tasks.length} tasks</p>
+              <p className="text-gray-500 self-start">{tasks.length} tasks</p>
 
               {showEditBoardModal && (
                 <BoardUpdateForm
