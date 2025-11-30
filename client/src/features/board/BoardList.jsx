@@ -16,7 +16,7 @@ export default function BoardList() {
 
   return (
     <>
-      <header className="boardHeader flex justify-around shadow items-center basis-1/4 gap-4 py-6 mb-5 bg-gray-50 border-b border-gray-200">
+      <header className="boardHeader flex-col sm:flex-row flex justify-around shadow items-center basis-1/4 gap-4 py-6 mb-5 bg-gray-50 border-b border-gray-200">
         <Notifications />
         <div className="boardCount text-lg font-medium">
           <h1 className="text-4xl font-bold">My Boards</h1>

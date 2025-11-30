@@ -29,7 +29,10 @@ export default function TaskUpdateForm({
   }
 
   return (
-    <ModalOverlay onClose={() => setShowEditTaskModal(false)}>
+    <ModalOverlay
+      title="Update Task"
+      onClose={() => setShowEditTaskModal(false)}
+    >
       <form
         className="taskUpdateForm flex flex-col gap-4"
         onSubmit={handleUpdateTask}
@@ -61,7 +64,7 @@ export default function TaskUpdateForm({
           <p className="completedText text-lg">Completed</p>
         </label>
         <button
-          className="updateTask text-lg font-medium p-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 cursor-pointer"
+          className="updateTask text-lg font-medium p-2 rounded-md focus:outline-none  bg-black text-white hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
           type="submit"
         >
           Update Task

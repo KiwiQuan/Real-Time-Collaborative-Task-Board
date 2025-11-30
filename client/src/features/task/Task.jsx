@@ -17,9 +17,11 @@ export default function Task({ task, boardId }) {
       }`}
     >
       <h3 className="taskTitle truncate">{task.title}</h3>
-      <p className="taskDescription truncate">{task.description}</p>
+      <p className="taskDescription truncate text-sm text-gray-500">
+        {task.description}
+      </p>
       <button
-        className="showTaskEditModal"
+        className="showTaskEditModal text-md font-medium p-2 rounded-md focus:outline-none bg-black text-white hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
         onClick={() => setShowEditTaskModal(true)}
       >
         Edit Task

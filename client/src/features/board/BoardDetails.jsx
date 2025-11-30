@@ -81,8 +81,8 @@ export default function BoardDetails() {
 
   return (
     <>
-      <div className="board-details-container flex basis-full bg-gray-50 justify-center ">
-        <div className="board-details flex flex-col gap-8 container min-w-[300px]">
+      <div className="board-details-container flex justify-center">
+        <div className="board-details flex flex-col gap-8 min-w-[300px] basis-full">
           <header className="board-header flex flex-col gap-4 mx-10 my-7 items-start justify-center">
             <Link
               className="back-to-boards flex items-center hover:bg-gray-200 rounded-md p-2 gap-5 text-sm cursor-pointer"
